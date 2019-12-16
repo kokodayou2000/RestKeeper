@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: operator-web
+server:
+  port: 8083
+#日志
+logging:
+  level:
+    org.springframework.web: debug
+
