@@ -35,6 +35,16 @@
     </properties>
 
     <dependencies>
+    <!-- nacos注册中心依赖包 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- 监控检查-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!--springboottest-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
