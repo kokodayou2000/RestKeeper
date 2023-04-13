@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: enterprise-web
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 180.76.224.206:8848
+      config:
+        server-addr: 180.76.224.206:8848
+        file-extension: yml
+        sharedDataids: common.yml
+        refreshable-dataids: common.yml
+
+server:
+  port: 8081

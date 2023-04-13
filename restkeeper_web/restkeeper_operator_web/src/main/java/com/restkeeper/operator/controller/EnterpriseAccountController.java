@@ -4,7 +4,9 @@ import com.restkeeper.operator.entity.EnterpriseAccount;
 import com.restkeeper.operator.service.IEnterpriseAccountService;
 import com.restkeeper.response.vo.AddEnterpriseAccountVO;
 import com.restkeeper.response.vo.PageVO;
+import com.restkeeper.response.vo.ResetPwdVO;
 import com.restkeeper.response.vo.UpdateEnterpriseAccountVO;
+import com.restkeeper.utils.AccountStatus;
 import com.restkeeper.utils.BeanListUtils;
 import com.restkeeper.utils.Result;
 import com.restkeeper.utils.ResultCode;
@@ -141,4 +143,45 @@ public class EnterpriseAccountController {
     }
 
 
+    @ApiOperation("账号删除，伪删除")
+    @DeleteMapping("/deleteById/{id}")
+    public Result deleteById(@PathVariable("id") String id){
+        Result result = new Result();
+        boolean b = enterpriseAccountService.removeById(id);
+        if (b){
+            result.setStatus(ResultCode.success);
+            result.setDesc("账号删除成功");
+        }else{
+            result.setStatus(ResultCode.error);
+            result.setDesc("账号删除失败");
+        }
+        return result;
+    }
+
+    //账号还原
+    @ApiOperation("账号还原")
+    @PutMapping("/recovery/{id}")
+    public boolean recovery(@PathVariable("id") String id){
+        return enterpriseAccountService.recovery(id);
+    }
+
+
+    //账号禁用
+    @ApiOperation("账号禁用")
+    @PutMapping("/forbidden/{id}")
+    public boolean forbidden(@PathVariable("id") String id){
+        //获取到id对应的实体
+        EnterpriseAccount enterpriseAccount = enterpriseAccountService.getById(id);
+        //设置该实体中的状态
+        enterpriseAccount.setStatus(AccountStatus.Forbidden.getStatus());
+        //更新
+        return enterpriseAccountService.updateById(enterpriseAccount);
+    }
+
+    //重置密码
+    @ApiOperation("密码重置")
+    @PutMapping("/restPwd")
+    public boolean restPwd(@RequestBody ResetPwdVO pwdVo){
+        return enterpriseAccountService.restPwd(pwdVo.getId(), pwdVo.getPwd());
+    }
 }

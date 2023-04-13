@@ -69,4 +69,13 @@ public class EnterpriseAccount implements Serializable {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime lastUpdateTime;
 
+    @ApiModelProperty(value = "是否删除  1 删除， 0 不删除")
+
+    /**
+     * value: 默认的原值
+     * delval: 删除后的值
+     */
+    @TableLogic(value = "0",delval = "1")
+    private Integer isDeleted;
+
 }
