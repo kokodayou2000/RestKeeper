@@ -5,6 +5,18 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.restkeeper.shop.entity.Brand">
         <id column="brand_id" property="brandId" />
+        <result column="brand_name" property="brandName"/>
+        <result column="logo" property="logo"/>
+        <result column="category" property="category"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="contact" property="contact"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+<!--        关联查询， 属性 要查询的行标签，执行的sql类型，参数的具体的方法-->
+        <association property="storeCount"  column="brand_id" select="com.restkeeper.shop.mapper.StoreMapper.getStoreCount"/>
+<!--        关联查询， 执行操作的时候 会调用StoreMapper中的getCityCount方法-->
+        <association property="cityCount"   column="brand_id" select="com.restkeeper.shop.mapper.StoreMapper.getCityCount"/>
     </resultMap>
 
 </mapper>

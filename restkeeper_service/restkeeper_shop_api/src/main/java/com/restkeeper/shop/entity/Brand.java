@@ -1,6 +1,7 @@
 package com.restkeeper.shop.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -43,5 +44,20 @@ public class Brand extends BaseShopEntity implements Serializable {
 
     @ApiModelProperty(value = "联系人电话")
     private String contactPhone;
+
+    @TableField(exist = false)
+    private int storeCount; //门店总数
+
+    @TableField(exist = false)
+    private int cityCount; //城市总数
+
+    @TableField(exist = false)
+    private String info; //页面显示的信息
+
+    public String getInfo(){
+        return "当前的品牌有"+this.getStoreCount()+"\n 分布在 "+this.getCityCount()+"个城市";
+    }
+
+
 }
 

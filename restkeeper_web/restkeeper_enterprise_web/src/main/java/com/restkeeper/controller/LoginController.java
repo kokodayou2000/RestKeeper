@@ -26,7 +26,4 @@ public class LoginController {
         return enterpriseAccountService.login(loginVO.getShopId(), loginVO.getPhone(), loginVO.getPassword());
     }
 
-
-
-
 }

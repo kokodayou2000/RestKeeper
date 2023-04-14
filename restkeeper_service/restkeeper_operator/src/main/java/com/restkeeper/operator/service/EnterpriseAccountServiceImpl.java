@@ -204,6 +204,7 @@ public class EnterpriseAccountServiceImpl extends ServiceImpl<EnterpriseAccountM
         }
 
         //根据密文获取到salt
+        assert account != null;
         String salts = MD5CryptUtil.getSalts(account.getPassword());
 
         //将明文密码和盐值生成对应的密文，判断是否和数据库中的密文是否相等
