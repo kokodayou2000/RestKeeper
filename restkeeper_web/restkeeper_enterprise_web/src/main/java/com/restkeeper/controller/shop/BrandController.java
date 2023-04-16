@@ -3,16 +3,15 @@ package com.restkeeper.controller.shop;
 import com.restkeeper.response.vo.PageVO;
 import com.restkeeper.shop.entity.Brand;
 import com.restkeeper.shop.service.IBrandService;
+import com.restkeeper.vo.shop.AddTBrandVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.BeanUtils;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Api(tags = {"品牌管理"})
@@ -32,5 +31,13 @@ public class BrandController {
                                   @PathVariable("pageSize") Integer pageSize){
 
         return new PageVO<Brand>(brandService.queryPage(page,pageSize));
+    }
+
+    @ApiOperation("新增品牌")
+    @PostMapping("/add")
+    public boolean add(@RequestBody AddTBrandVO brandVO){
+        Brand brand = new Brand();
+        BeanUtils.copyProperties(brandVO,brand);
+        return brandService.save(brand);
     }
 }
